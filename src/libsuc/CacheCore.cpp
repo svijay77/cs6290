@@ -34,7 +34,7 @@ Temple Place - Suite 330, Boston, MA 02111-1307, USA.
 #include "CacheCore.h"
 #include "SescConf.h"
 #include "libcore/EnergyMgr.h"
-#define k_NXLRU      "NXLRU"
+
 #define k_RANDOM     "RANDOM"
 #define k_LRU        "LRU"
 
@@ -230,8 +230,6 @@ CacheAssoc<State, Addr_t, Energy>::CacheAssoc(int32_t size, int32_t assoc, int32
         policy = RANDOM;
     else if (strcasecmp(pStr, k_LRU)    == 0)
         policy = LRU;
-    else if (strcasecmp(pStr, k_NXLRU) == 0)
-        policy = NXLRU; 
     else {
         MSG("Invalid cache policy [%s]",pStr);
         exit(0);
@@ -355,22 +353,23 @@ typename CacheAssoc<State, Addr_t, Energy>::Line
 
     if (lineFree == 0) {
         I(ignoreLocked);
-    }
-    else {
-       if (policy == LRU) { 
+        if (policy == RANDOM) {
+            lineFree = &theSet[irand];
+            irand = (irand + 1) & maskAssoc;
+        } else {
+            I(policy == LRU);
             // Get the oldest line possible
             lineFree = setEnd-1;
-       } else if (policy == NXLRU) {
-            lineFree = setEnd-1;
-       } 
+        }
+    } else if(ignoreLocked) {
+        if (policy == RANDOM && (*lineFree)->isValid()) {
+            lineFree = &theSet[irand];
+            irand = (irand + 1) & maskAssoc;
+        } else {
+            //      I(policy == LRU);
+            // Do nothing. lineFree is the oldest
+        }
     }
-
-
-
-
- 
-  
-   
 
     I(lineFree);
     GI(!ignoreLocked, !(*lineFree)->isValid() || !(*lineFree)->isLocked());
