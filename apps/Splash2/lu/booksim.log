@@ -1,0 +1,34 @@
+Phase 0 time 1
+Class 0:
+Minimum packet latency = 1.79769e+308
+Average packet latency = -nan
+Maximum packet latency = 2.22507e-308
+Minimum network latency = 1.79769e+308
+Average network latency = -nan
+Maximum network latency = 2.22507e-308
+Slowest packet = -1
+Minimum flit latency = 1.79769e+308
+Average flit latency = -nan
+Maximum flit latency = 2.22507e-308
+Slowest flit = -1
+Minimum fragmentation = 1.79769e+308
+Average fragmentation = -nan
+Maximum fragmentation = 2.22507e-308
+Minimum injected packet rate = 0 (at node 0)
+Average injected packet rate = 0
+Maximum injected packet rate = 0 (at node 0)
+Minimum accepted packet rate = 0 (at node 0)
+Average accepted packet rate = 0
+Maximum accepted packet rate = 0 (at node 0)
+Minimum injected flit rate = 0 (at node 0)
+Average injected flit rate = 0
+Maximum injected flit rate = 0 (at node 0)
+Minimum accepted flit rate = 0 (at node 0)
+Average accepted flit rate = 0
+Maximum accepted flit rate = 0 (at node 0)
+Average injected packet length = -nan
+Average accepted packet length = -nan
+Total in-flight flits = 0 (0 measured)
+latency change    = nan
+throughput change = nan
+
